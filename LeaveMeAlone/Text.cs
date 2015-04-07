@@ -57,9 +57,17 @@ namespace LeaveMeAlone
         {
             sb.DrawString(font, message, position, color);
         }
-        public void Draw(SpriteBatch sb, Color c)
+        public void Draw(SpriteBatch sb, Color c=default(Color), Vector2 pos = default(Vector2))
         {
-            sb.DrawString(font, message, position, c);
+            if(c == default(Color))
+            {
+                c = this.color;
+            }
+            if(pos == default(Vector2))
+            {
+                pos = position;
+            }
+            sb.DrawString(font, message, pos, c);
         }
         public void Move(Vector2 pos)
         {
