@@ -14,21 +14,31 @@ namespace LeaveMeAlone
         public SpriteFont font;
         public Color color;
         public string message;
-
+        public Vector2 position;
         public static Color DEFAULT_COLOR = Color.Black;
 
-        public Text(SpriteFont f, Color c, string msg="")
+        public Text(SpriteFont f, Color c, Vector2 pos, string msg="")
         {
             message = msg;
             font = f;
             color = c;
+            position = pos;
         }
-        public Text(string msg = "")
+        public Text(Vector2 pos, string msg = "")
         {
             message = msg;
             font = fonts["Arial-12"];
             color = DEFAULT_COLOR;
+            position = pos;
         }
+        /*public Text(string msg = "")
+        {
+            message = msg;
+            font = fonts["Arial-12"];
+            color = DEFAULT_COLOR;
+            position = new Vector2(0,0);
+        }*/
+
 
         public void changeMessage(string msg) 
         {
@@ -43,15 +53,17 @@ namespace LeaveMeAlone
             fonts["BattleMenuText-12"] = content.Load<SpriteFont>("Fonts/BattleMenuText-12");
             fonts["RetroComputer-12"] = content.Load<SpriteFont>("Fonts/RetroComputer-12");
         }
-
-        public void draw(SpriteBatch sb, int x, int y)
+        public void Draw(SpriteBatch sb)
         {
-            //draws a string, params are your font, your message, position, and color
-            if (font != null)
-            {
-                sb.DrawString(font, message, new Vector2(x, y), color);
-            }
+            sb.DrawString(font, message, position, color);
         }
-        
+        public void Draw(SpriteBatch sb, Color c)
+        {
+            sb.DrawString(font, message, position, c);
+        }
+        public void Move(Vector2 pos)
+        {
+            position = pos;
+        }
     }
 }

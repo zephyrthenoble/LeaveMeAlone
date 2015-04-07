@@ -5,7 +5,7 @@ using System.Text;
 using LeaveMeAlone;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 
 namespace LeaveMeAlone
 {
@@ -62,8 +62,17 @@ namespace LeaveMeAlone
         }
         public void Draw(SpriteBatch s)
         {
+            foreach(Skill skill in buttons.Keys)
+            {
+                if(skill.cost > Resources.gold)
+                {
+                    buttons[skill].DrawRect(s, Color.Red);
+                    
+                }
+            }
             foreach(Button button in buttons.Values)
             {
+                
                 button.Draw(s);
             }
 

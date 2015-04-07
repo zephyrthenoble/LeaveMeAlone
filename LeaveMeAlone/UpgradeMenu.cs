@@ -51,9 +51,10 @@ namespace LeaveMeAlone
                 {
                     if(skilltree.buttons[s].Intersects(currentMouseState.X, currentMouseState.Y))
                     {
-                        if(BattleManager.boss.skills.Contains(s) == false)
+                        if(BattleManager.boss.skills.Contains(s) == false && Resources.gold > s.cost)
                         {
                             BattleManager.boss.addSkill(s);
+                            Resources.gold -= s.cost;
                             Console.WriteLine(BattleManager.boss.skills.Count);
                         }
                         //Console.WriteLine(s+" pressed");

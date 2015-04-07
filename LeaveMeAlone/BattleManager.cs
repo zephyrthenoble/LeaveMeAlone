@@ -83,7 +83,7 @@ namespace LeaveMeAlone
 
             buttonLocPic = Content.Load<Texture2D>("buttonbase");
             targeter = Content.Load<Texture2D>("Target");
-            target_text = new Text("Select Target");
+            target_text = new Text(new Vector2(200, 180), "Select Target");
 
             basic_buttons[0] = new Button(buttonLocPic, button_basex, button_basey, 250, 50);
             basic_buttons[1] = new Button(buttonLocPic, button_basex + 300, button_basey, 250, 50);
@@ -104,7 +104,7 @@ namespace LeaveMeAlone
 
 
             bossLoc = new Rectangle(650, 120, 100, 100); 
-            boss_hp = new Text("");
+            boss_hp = new Text(new Vector2(bossLoc.X, bossLoc.Y));
             boss_energy = new Text("");
 
             for (int i = 0; i < 4; i++)
@@ -139,7 +139,7 @@ namespace LeaveMeAlone
 
         public static void Init(Character.Type t)
         {
-            message = new Text(Text.fonts["Arial-12"], Color.Black, "");
+            message = new Text(Text.fonts["Arial-12"], Color.Black, new Vector2(0, 0), "");
             boss.sPosition = new Vector2(bossLoc.X - 20, bossLoc.Y + 20);
             victory = false;
             defeat = false;
@@ -634,7 +634,8 @@ namespace LeaveMeAlone
                         heroes[i].Draw(spriteBatch, Color.Violet);
                         if (state == State.Target || state == State.Bribe)
                         {
-                            target_text.draw(spriteBatch, 200, 180);
+                            target_text.Move(new Vector2(heroLoc[i].Location.X, heroLoc[i].Location.Y + 30));
+                            target_text.Draw(spriteBatch);
                             spriteBatch.Draw(targeter, new Vector2(heroLoc[i].Location.X + 45, heroLoc[i].Location.Y), Color.Red);
                         }
                     }
@@ -643,11 +644,12 @@ namespace LeaveMeAlone
                         heroes[i].Draw(spriteBatch, Color.White);
                         if (state == State.Target || state == State.Bribe)
                         {
-                            target_text.draw(spriteBatch, 200, 180);
+                            target_text.Move(new Vector2(heroLoc[i].Location.X, heroLoc[i].Location.Y + 30));
+                            target_text.Draw(spriteBatch);
                             spriteBatch.Draw(targeter, new Vector2(heroLoc[i].Location.X + 45, heroLoc[i].Location.Y), Color.Black);
                         }
                     }
-                    hero_hp[i].draw(spriteBatch, heroLoc[i].Location.X, heroLoc[i].Location.Y + 30);
+                    hero_hp[i].Draw(spriteBatch);
 
                     if (!heroes[i].damage_text.message.Equals(""))
                     {
